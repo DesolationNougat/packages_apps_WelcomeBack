@@ -23,20 +23,29 @@ import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.SystemProperties;
 import android.os.UserHandle;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.util.Log;
 
 public class WBReceiver extends BroadcastReceiver {
     private static final String TAG = "WelcomeBackBootReceiver";
+    private static final String WB_TOGGLE = "wb_toggle";
+
+    private boolean mShowWB;
 
     @Override
     public void onReceive(final Context context, Intent intent) {
+        SharedPreferences pref = context.getSharedPreferences("WBPrefs", Context.MODE_PRIVATE);
         ContentResolver res = context.getContentResolver();
-        FirstBootNotify(context);
+        mShowWB = pref.getBoolean(WB_TOGGLE, true);
+        if (mShowWB){
+            FirstBootNotify(context);
+        }
         Log.i(TAG, "Notified boot");
     }
 
@@ -44,10 +53,10 @@ public class WBReceiver extends BroadcastReceiver {
         Notification.Builder mBuilder = new Notification.Builder(context)
                 .setSmallIcon(R.drawable.ic_status_bar_deso_logo)
                 .setAutoCancel(true)
-                .setContentTitle("Welcome to DesolationROM")
+                .setContentTitle(context.getString(R.string.notification_title))
                 .setContentText("")
 		.setStyle(new Notification.InboxStyle()
-		.setBigContentTitle("Welcome to DesolationROM")
+		.setBigContentTitle(context.getString(R.string.notification_title))
 		.addLine("Build status: "+SystemProperties.get("ro.deso.buildtype"))
 		.addLine("Build date: "+SystemProperties.get("ro.build.date"))
 		.addLine("Device: "+SystemProperties.get("ro.product.device")));

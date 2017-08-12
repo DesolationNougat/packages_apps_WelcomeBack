@@ -18,8 +18,31 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
+LOCAL_RESOURCE_DIR := packages/apps/WelcomeBack/res
 LOCAL_SRC_FILES := $(call all-subdir-java-files)
 LOCAL_PACKAGE_NAME := WelcomeBack
 LOCAL_CERTIFICATE := platform
 LOCAL_MODULE_TAGS := optional
+
+ifeq ($(TARGET_BUILD_APPS),)
+LOCAL_RESOURCE_DIR += frameworks/support/v7/appcompat/res
+LOCAL_RESOURCE_DIR += frameworks/support/v7/gridlayout/res
+LOCAL_RESOURCE_DIR += frameworks/support/v7/recyclerview/res
+else
+LOCAL_RESOURCE_DIR += prebuilts/sdk/current/support/v7/appcompat/res
+LOCAL_RESOURCE_DIR += prebuilts/sdk/current/support/v7/gridlayout/res
+LOCAL_RESOURCE_DIR += prebuilts/sdk/current/support/v7/recyclerview/res
+endif
+
+LOCAL_STATIC_JAVA_LIBRARIES += android-support-v13
+LOCAL_STATIC_JAVA_LIBRARIES += android-support-v4
+LOCAL_STATIC_JAVA_LIBRARIES += android-support-v7-appcompat
+LOCAL_STATIC_JAVA_LIBRARIES += android-support-v7-gridlayout
+LOCAL_STATIC_JAVA_LIBRARIES += android-support-v7-recyclerview
+
+LOCAL_AAPT_FLAGS := --auto-add-overlay
+LOCAL_AAPT_FLAGS += --extra-packages android.support.v7.appcompat
+LOCAL_AAPT_FLAGS += --extra-packages android.support.v7.gridlayout
+LOCAL_AAPT_FLAGS += --extra-packages android.support.v7.recyclerview
+
 include $(BUILD_PACKAGE)
