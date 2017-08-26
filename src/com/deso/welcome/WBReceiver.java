@@ -45,8 +45,10 @@ public class WBReceiver extends BroadcastReceiver {
         mShowWB = pref.getBoolean(WB_TOGGLE, true);
         if (mShowWB){
             FirstBootNotify(context);
+            Log.i(TAG, "Notified boot");
+        } else {
+            Log.i(TAG, "Notification Disabled");
         }
-        Log.i(TAG, "Notified boot");
     }
 
     public void FirstBootNotify(Context context) {
