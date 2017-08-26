@@ -3,6 +3,8 @@
 
     <SwitchPreference
         android:key="wb_toggle"
-        android:title="@string/wb_title" />
+        android:title="@string/wb_title"
+        android:persistent="true"
+        android:defaultValue="true" />
 
 </PreferenceScreen>
