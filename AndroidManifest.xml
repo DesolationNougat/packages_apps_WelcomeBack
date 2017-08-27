@@ -43,7 +43,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         </receiver>
         <activity android:name=".PrefsFragment"
             android:label="@string/app_label"
-            android:icon="@drawable/ic_status_bar_deso_logo"
+            android:icon="@mipmap/ic_launcher"
             android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
