@@ -7,4 +7,13 @@
         android:persistent="true"
         android:defaultValue="true" />
 
+    <ListPreference
+        android:key="wb_duration"
+        android:title="@string/wb_duration_title"
+        android:entries="@array/wb_duration_entries"
+        android:entryValues="@array/wb_duration_values"
+        android:persistent="true"
+        android:defaultValue="12000"
+        android:dependency="wb_toggle" />
+
 </PreferenceScreen>
